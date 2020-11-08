@@ -49,10 +49,11 @@ class Corpus(object):
         # your code here
         # #############################
         with open(self.documents_path) as f:
-            lines = []
-            for line in f:
-                lines = line.split()
-                self.documents.append(lines)
+            lines = list(line for line in (l.strip() for l in f) if line)
+            doc = []
+            for line in lines:
+                doc = line.split()
+                self.documents.append(doc)
         self.number_of_documents = len(self.documents)
 
     def build_vocabulary(self):
@@ -92,9 +93,9 @@ class Corpus(object):
         # your code here
         # ############################
         matrix = {}
-        for  i in range (0, self.number_of_documents):
+        for  i in range (self.number_of_documents):
             matrix[i] = {}
-            for j in range (0, self.vocabulary_size):
+            for j in range (self.vocabulary_size):
                 matrix[i][j] = self.documents[i].count(self.vocabulary[j])
         self.term_doc_matrix = matrix
         
