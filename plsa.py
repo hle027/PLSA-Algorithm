@@ -72,16 +72,12 @@ class Corpus(object):
         self.vocabulary = list(unique_words)
         self.vocabulary_size = len(self.vocabulary)
         """
-        
-        data = ""
-        gg = ""
-        final = []
+        unique_words = set()
         with open(self.documents_path, 'r') as file:
-            data = file.read().replace('\n' , '')
-            gg = re.sub('\d', '', data)
-        unique_words = set(gg.split())
-        final = list(unique_words)
-        self.vocabulary = final
+            for line in file:
+                for word in line.split():
+                    unique_words.add(word)
+        self.vocabulary = list(unique_words)
         self.vocabulary_size = len(self.vocabulary)
 
     def build_term_doc_matrix(self):
