@@ -66,7 +66,7 @@ class Corpus(object):
         # #############################
         unique_words = set()
         for document in self.documents:
-            for word in document.words:
+            for word in document:
                 unique_words.add(word)
         self.vocabulary = list(unique_words)
         self.vocabulary_size = len(self.vocabulary)
