@@ -115,7 +115,7 @@ class Corpus(object):
         self.document_topic_prob = np.random.random((self.number_of_documents, number_of_topics))
         self.document_topic_prob = normalize(self.document_topic_prob)
         
-        self.topic_word_prob = np.random.random((number_of_topics, self.vocabulary_size))
+        self.topic_word_prob = np.random.random((number_of_topics, len(self.vocabulary)))
         self.topic_word_prob = normalize(self.topic_word_prob)
         
 
@@ -152,10 +152,17 @@ class Corpus(object):
         # ############################
         number_of_topics = self.topic_prob.shape[1]
         for d in range(self.number_of_documents):
-              for z in range(number_of_topics):
-                       for w in range(self.vocabulary_size):
-                          self.topic_prob[d][z][w] = self.document_topic_prob[d, z] * self.topic_word_prob[z, w] 
-                        
+              for w in range(self.vocabulary_size):
+                    demoninator = 0;
+                    for z in range(number_of_topics):
+                       self.topic_prob[d][z][w] = self.document_topic_prob[d][z] * self.topic_word_prob[z][w] 
+                       denominator += self.topic_prob[d][z][w]
+                    if denominator == 0:
+                       for z in range(number_of_topics):
+                         self.topic_prob[d][z][w] = 0
+                    else:
+                       for z in range(number_of_topics):
+                         self.topic_prob[d][z][w] /= denominator
 
     def maximization_step(self, number_of_topics):
         """ The M-step updates P(w | z)
@@ -168,7 +175,7 @@ class Corpus(object):
                     s = 0
                     for d in range(self.number_of_documents):
                         count = self.term_doc_matrix[d][w]
-                        s = s + count * self.topic_prob[d, z, w]
+                        s = s + count * self.topic_prob[d][z][w]
                     self.topic_word_prob[z][w] = s
         self.topic_word_prob = normalize(self.topic_word_prob)
         # ############################
@@ -182,7 +189,7 @@ class Corpus(object):
                     s = 0
                     for w in range(self.vocabulary_size):
                         count = self.term_doc_matrix[d][w]
-                        s = s + count * self.topic_prob[d, z, w]
+                        s = s + count * self.topic_prob[d][z][w]
                     self.document_topic_prob[d][z] = s
         self.document_topic_prob = normalize(self.document_topic_prob)
                 
@@ -204,7 +211,7 @@ class Corpus(object):
             for w in range(self.vocabulary_size):
                 total_doc = 0
                 for z in range(number_of_topics):
-                    total_doc += self.term_doc_matrix[d][z] * self.topic_word_prob[z, w]
+                    total_doc += self.term_doc_matrix[d][z] * self.topic_word_prob[z][w]
                     total += math.log(total_doc) * self.term_doc_matrix[d][z]
         self.likelihoods.append(total)
         # ############################
