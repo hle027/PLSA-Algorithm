@@ -205,7 +205,7 @@ class Corpus(object):
                 total_doc = 0
                 for w in range(self.vocabulary_size):
                     total_doc += self.term_doc_matrix[d][z] * self.topic_word_prob[z, w]
-                    total += math.log(abs(total_doc)) * self.term_doc_matrix[d][z]
+                    total += np.log(total_doc) * self.term_doc_matrix[d][z]
         return total
         # ############################
         # your code here
