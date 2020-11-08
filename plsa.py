@@ -76,7 +76,7 @@ class Corpus(object):
         data = ""
         gg = ""
         final = []
-        with open('test.txt', 'r') as file:
+        with open(self.documents_path, 'r') as file:
             data = file.read().replace('\n' , '')
             gg = re.sub('\d', '', data)
         unique_words = set(gg.split())
