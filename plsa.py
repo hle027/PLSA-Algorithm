@@ -101,6 +101,7 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
+        
         self.document_topic_prob = np.random.random_sample((self.number_of_documents, number_of_topics))
         self.document_topic_prob = normalize(self.document_topic_prob)
         
