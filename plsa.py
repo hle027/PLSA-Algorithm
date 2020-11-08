@@ -72,6 +72,7 @@ class Corpus(object):
         self.vocabulary = list(unique_words)
         self.vocabulary_size = len(self.vocabulary)
         """
+        
         data = ""
         gg = ""
         final = []
