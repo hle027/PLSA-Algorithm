@@ -53,6 +53,7 @@ class Corpus(object):
             for line in f:
                 lines = line.split()
                 self.documents.append(lines)
+        self.number_of_documents = len(self.documents)
 
     def build_vocabulary(self):
         """
@@ -91,9 +92,9 @@ class Corpus(object):
         # your code here
         # ############################
         matrix = {}
-        for  i in range (0, len(self.documents)):
+        for  i in range (0, self.number_of_documents):
             matrix[i] = {}
-            for j in range (0, len(self.vocabulary)):
+            for j in range (0, self.vocabulary_size):
                 matrix[i][j] = self.documents[i].count(self.vocabulary[j])
         self.term_doc_matrix = matrix
         
@@ -111,10 +112,10 @@ class Corpus(object):
         # your code here
         # ############################
         
-        self.document_topic_prob = np.random.random_sample((self.number_of_documents, number_of_topics))
+        self.document_topic_prob = np.random.random((self.number_of_documents, number_of_topics))
         self.document_topic_prob = normalize(self.document_topic_prob)
         
-        self.topic_word_prob = np.random.random_sample((number_of_topics, len(self.vocabulary)))
+        self.topic_word_prob = np.random.random((number_of_topics, self.vocabulary_size))
         self.topic_word_prob = normalize(self.topic_word_prob)
         
 
@@ -149,7 +150,7 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
-        for d in range(len(self.documents)):
+        for d in range(self.number_of_documents):
             for w in range(self.vocabulary_size):
                prob = self.document_topic_prob[d, :] * self.topic_word_prob[:, w]
                self.topic_prob[d][w] = prob
@@ -164,7 +165,7 @@ class Corpus(object):
         for z in range(number_of_topics):
                 for w in range(self.vocabulary_size):
                     s = 0
-                    for d in range(len(self.documents)):
+                    for d in range(self.number_of_documents):
                         count = term_doc_matrix[d][w]
                         s = s + count * self.topic_prob[d, w, z]
                     self.topic_word_prob[z][w] = s
@@ -175,7 +176,7 @@ class Corpus(object):
 
         
         # update P(z | d)
-        for d in range(len(self.documents)):
+        for d in range(self.number_of_documents):
                 for z in range(number_of_topics):
                     s = 0
                     for w in range(self.vocabulary_size):
@@ -198,7 +199,7 @@ class Corpus(object):
         Append the calculated log-likelihood to self.likelihoods
 
         """
-        for d in range(len(self.documents)):
+        for d in range(self.number_of_documents):
             for z in range(number_of_topics):
                 total = 0
                 for w in range(self.vocabulary_size):
