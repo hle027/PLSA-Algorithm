@@ -210,10 +210,11 @@ class Corpus(object):
         total = 0
         for d in range(self.number_of_documents):
             for w in range(self.vocabulary_size):
-                total_doc = 0
+                tmp = 0
                 for z in range(number_of_topics):
-                    total_doc += self.term_doc_matrix[d][z] * self.topic_word_prob[z][w]
-                    total += np.log(total_doc) * self.term_doc_matrix[d][z]
+                    tmp += self.term_doc_matrix[d][z] * self.topic_word_prob[z][w]
+                if tmp > 0:
+                    total += math.log(total_doc) * self.term_doc_matrix[d][z]
         self.likelihoods.append(total)
         # ############################
         # your code here
