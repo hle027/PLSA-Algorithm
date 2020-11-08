@@ -150,7 +150,7 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
-        for d in range(self.number_of_documents):
+        for d, document in enumerate(self.documents):
             for w in range(self.vocabulary_size):
                prob = self.document_topic_prob[d, :] * self.topic_word_prob[:, w]
                self.topic_prob[d][w] = prob
