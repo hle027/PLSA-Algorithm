@@ -198,12 +198,13 @@ class Corpus(object):
         Append the calculated log-likelihood to self.likelihoods
 
         """
+        total = 0
         for d in range(self.number_of_documents):
             for z in range(number_of_topics):
-                total = 0
+                total_doc = 0
                 for w in range(self.vocabulary_size):
-                    total += self.topic_prob[d, z, w] * self.topic_word_prob[z, w] * self.term_doc_matrix[d][w]
-                    total += np.log(total)
+                    total_doc += self.term_doc_matrix[d][z] * self.topic_word_prob[z, w]
+                    total += math.log(total_doc) * self.term_doc_matrix[d][z]
         return total
         # ############################
         # your code here
