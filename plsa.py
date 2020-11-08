@@ -48,7 +48,7 @@ class Corpus(object):
         # #############################
         # your code here
         # #############################
-        with open(self.document_path) as f:
+        with open(self.documents_path) as f:
             lines = []
             for line in f:
                 lines = line.split()
