@@ -150,14 +150,16 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
-        for d, document in enumerate(self.documents):
+        for d in range(self.number_of_documents):
             for w in range(self.vocabulary_size):
-               prob = self.document_topic_prob[d, :] * self.topic_word_prob[:, w]
-               if sum(prob) == 0.0:
-                    exit(0)
-               else:  
-                    normalize(prob)
-               self.topic_prob[d][w] = prob
+                prob = np.zeros([number_of_topics], dtype = float)
+                for z in range(number_of_topics):
+                   prob[z] = self.document_topic_prob[d, z] * self.topic_word_prob[z, w]
+                sum1 = np.sum(prob)
+                if summ1 == 0:
+                   sum1 = 1 
+                for z in range(number_of_topics):
+                   self.topic_prob[d,w,z] = prob[z]/sum1
 
     def maximization_step(self, number_of_topics):
         """ The M-step updates P(w | z)
@@ -191,8 +193,6 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
-        
-        pass    # REMOVE THIS
 
 
     def calculate_likelihood(self, number_of_topics):
