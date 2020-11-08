@@ -153,12 +153,9 @@ class Corpus(object):
         number_of_topics = self.topic_prob.shape[1]
         for d in range(self.number_of_documents):
               for z in range(number_of_topics):
-                       """sum = 0"""
                        for w in range(self.vocabulary_size):
                           self.topic_prob[d][z][w] = self.document_topic_prob[d, z] * self.topic_word_prob[z, w] 
-                         """ sum = sum + self.topic_prob[d][w][z]
-                       self.topic_prob[d][w] = self.topic_prob[d][w]/sum"""
-
+                        
 
     def maximization_step(self, number_of_topics):
         """ The M-step updates P(w | z)
