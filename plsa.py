@@ -216,7 +216,7 @@ class Corpus(object):
                     tmp += self.topic_word_prob[z][w] * self.document_topic_prob[d][z]
                 if tmp > 0:
                     total += math.log(tmp) * self.term_doc_matrix[d][w]
-        self.likelihoods.append(total)
+                self.likelihoods.append(total)
         # ############################
         # your code here
         # ############################
@@ -252,10 +252,10 @@ class Corpus(object):
             self.maximization_step(number_of_topics)
             self.calculate_likelihood(number_of_topics)
             print(current_likelihood)
-            print(self.likelihoods[0])
-            if (abs(current_likelihood - self.likelihoods[0]) <= epsilon):
+            print(self.likelihoods[max_iter])
+            if (abs(current_likelihood - self.likelihoods[max_iter]) <= epsilon):
                 break
-            current_likelihood = self.likelihoods[0]
+            current_likelihood = self.likelihoods[max_iter]
 
 
 
