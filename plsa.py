@@ -155,7 +155,7 @@ class Corpus(object):
                prob = self.document_topic_prob[d, :] * self.topic_word_prob[:, w]
                if sum(prob) == 0.0:
                     exit(0)
-               else  
+               else:  
                     normalize(prob)
                self.topic_prob[d][w] = prob
 
