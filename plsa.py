@@ -167,7 +167,7 @@ class Corpus(object):
                 for w in range(self.vocabulary_size):
                     s = 0
                     for d in range(self.number_of_documents):
-                        count = term_doc_matrix[d][w]
+                        count = self.term_doc_matrix[d][w]
                         s = s + count * self.topic_prob[d, w, z]
                     self.topic_word_prob[z][w] = s
                 normalize(self.topic_word_prob[z])
@@ -181,7 +181,7 @@ class Corpus(object):
                 for z in range(number_of_topics):
                     s = 0
                     for w in range(self.vocabulary_size):
-                        count = term_doc_matrix[d][w]
+                        count = self.term_doc_matrix[d][w]
                         s = s + count * self.topic_prob[d, w, z]
                     self.document_topic_prob[d][z] = s
                 normalize(self.document_topic_prob[d])
