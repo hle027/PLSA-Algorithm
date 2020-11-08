@@ -156,14 +156,14 @@ class Corpus(object):
               for w in range(self.vocabulary_size):
                     demoninator = 0
                     for z in range(number_of_topics):
-                       self.topic_prob[d][w][z] = self.topic_word_prob[z][w] * self.document_topic_prob[d][z]
-                       denominator += self.topic_prob[d][w][z]
+                       self.topic_prob[d][z][w] = self.topic_word_prob[z][w] * self.document_topic_prob[d][z]
+                       denominator += self.topic_prob[d][z][w]
                     if denominator == 0:
                        for z in range(number_of_topics):
-                         self.topic_prob[d][w][z] = 0
+                         self.topic_prob[d][z][w] = 0
                     else:
                        for z in range(number_of_topics):
-                         self.topic_prob[d][w][z] /= denominator
+                         self.topic_prob[d][z][w] /= denominator
 
     def maximization_step(self, number_of_topics):
         """ The M-step updates P(w | z)
@@ -176,7 +176,7 @@ class Corpus(object):
                     s = 0
                     for d in range(self.number_of_documents):
                         count = self.term_doc_matrix[d][w]
-                        s = s + count * self.topic_prob[d][w][z]
+                        s = s + count * self.topic_prob[d][z][w]
                     self.topic_word_prob[z][w] = s
         self.topic_word_prob = normalize(self.topic_word_prob)
         # ############################
@@ -190,7 +190,7 @@ class Corpus(object):
                     s = 0
                     for w in range(self.vocabulary_size):
                         count = self.term_doc_matrix[d][w]
-                        s = s + count * self.topic_prob[d][w][z]
+                        s = s + count * self.topic_prob[d][z][w]
                     self.document_topic_prob[d][z] = s
         self.document_topic_prob = normalize(self.document_topic_prob)
                 
@@ -212,7 +212,7 @@ class Corpus(object):
             for w in range(self.vocabulary_size):
                 tmp = 0
                 for z in range(number_of_topics):
-                    tmp += self.topic_word_prob[z][w] * self.term_doc_matrix[d][z]
+                    tmp += self.topic_word_prob[z][w] * self.document_topic_prob[d][z]
                 if tmp > 0:
                     total += math.log(tmp) * self.term_doc_matrix[d][w]
         self.likelihoods.append(total)
