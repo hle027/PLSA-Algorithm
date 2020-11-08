@@ -252,10 +252,10 @@ class Corpus(object):
             self.maximization_step(number_of_topics)
             self.calculate_likelihood(number_of_topics)
             print(current_likelihood)
-            print(self.likelihoods[max_iter])
-            if (abs(current_likelihood - self.likelihoods[max_iter]) <= epsilon):
+            print(self.likelihoods[iteration])
+            if (abs(current_likelihood - self.likelihoods[iteration]) <= epsilon):
                 break
-            current_likelihood = self.likelihoods[max_iter]
+            current_likelihood = self.likelihoods[iteration]
 
 
 
