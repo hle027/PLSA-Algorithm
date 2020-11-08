@@ -214,7 +214,7 @@ class Corpus(object):
                 for z in range(number_of_topics):
                     tmp += self.term_doc_matrix[d][z] * self.topic_word_prob[z][w]
                 if tmp > 0:
-                    total += math.log(total_doc) * self.term_doc_matrix[d][z]
+                    total += math.log(tmp) * self.term_doc_matrix[d][z]
         self.likelihoods.append(total)
         # ############################
         # your code here
