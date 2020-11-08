@@ -153,7 +153,7 @@ class Corpus(object):
         number_of_topics = self.topic_prob.shape[1]
         for d in range(self.number_of_documents):
               for w in range(self.vocabulary_size):
-                       for z in range(self.number_of_topics):
+                       for z in range(number_of_topics):
                           self.topic_prob[d][w][z] = self.topic_word_prob[z, w] * self.document_topic_prob[d, z]
               normalize(self.topic_prob[d,:,:])
 
