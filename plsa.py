@@ -201,17 +201,15 @@ class Corpus(object):
         """
         total = 0
         for d in range(self.number_of_documents):
-            for z in range(number_of_topics):
+            for w in range(self.vocabulary_size):
                 total_doc = 0
-                for w in range(self.vocabulary_size):
+                for z in range(number_of_topics):
                     total_doc += self.term_doc_matrix[d][z] * self.topic_word_prob[z, w]
-                    total += np.log(total_doc) * self.term_doc_matrix[d][z]
-        return total
+                    total += math.log(total_doc) * self.term_doc_matrix[d][z]
+        self.likelihoods.append(total)
         # ############################
         # your code here
         # ############################
-        
-        return
 
     def plsa(self, number_of_topics, max_iter, epsilon):
 
