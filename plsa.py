@@ -5,7 +5,7 @@ import math
 def normalize(input_matrix):
     """
     Normalizes the rows of a 2d input_matrix so they sum to 1
-    """
+    """  
 
     row_sums = input_matrix.sum(axis=1)
     try:
