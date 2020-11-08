@@ -152,14 +152,10 @@ class Corpus(object):
         # ############################
         for d in range(self.number_of_documents):
             for w in range(self.vocabulary_size):
-                prob = np.zeros([number_of_topics], dtype = float)
-                for z in range(number_of_topics):
-                   prob[z] = self.document_topic_prob[d, z] * self.topic_word_prob[z, w]
-                sum1 = np.sum(prob)
-                if summ1 == 0:
-                   sum1 = 1 
-                for z in range(number_of_topics):
-                   self.topic_prob[d,w,z] = prob[z]/sum1
+                prob = self.document_topic_prob[:, w] * self.topic_word_prob[d, :]
+                prob = normalize(prob[np.newaxis,:])
+                self.topic_prob[d,:,w] = prob
+            self.topic_prob = normalize(self.topic_prob[d,:,:])
 
     def maximization_step(self, number_of_topics):
         """ The M-step updates P(w | z)
