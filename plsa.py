@@ -185,6 +185,7 @@ class Corpus(object):
                         s = s + count * self.topic_prob[d, w, z]
                     self.document_topic_prob[d][z] = s
                 normalize(self.document_topic_prob[d])
+                
 
         # ############################
         # your code here
