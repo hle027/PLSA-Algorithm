@@ -150,6 +150,7 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
+        number_of_topics = self.topic_prob.shape[1]
         for d in range(self.number_of_documents):
               for w in range(self.vocabulary_size):
                        for z in range(self.number_of_topics):
