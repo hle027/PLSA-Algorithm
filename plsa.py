@@ -252,7 +252,7 @@ class Corpus(object):
             self.calculate_likelihood(number_of_topics)
             current_likelihood = self.likelihoods[len(self.likelihoods) - 1]
             print(current_likelihood)
-            print(len(self.likelihoods))
+            print(self.likelihoods[1])
             if (abs(current_likelihood - self.likelihoods) <= epsilon):
                 break
       
