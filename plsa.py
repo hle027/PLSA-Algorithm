@@ -153,8 +153,11 @@ class Corpus(object):
         for d, document in enumerate(self.documents):
             for w in range(self.vocabulary_size):
                prob = self.document_topic_prob[d, :] * self.topic_word_prob[:, w]
+               if sum(prob) == 0.0:
+                    exit(0)
+               else  
+                    normalize(prob)
                self.topic_prob[d][w] = prob
-            normalize(self.topic_prob[d])
 
     def maximization_step(self, number_of_topics):
         """ The M-step updates P(w | z)
