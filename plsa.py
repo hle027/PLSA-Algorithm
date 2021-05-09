@@ -45,9 +45,6 @@ class Corpus(object):
         
         Update self.number_of_documents
         """
-        # #############################
-        # your code here
-        # #############################
         with open(self.documents_path) as f:
             lines = list(line for line in (l.strip() for l in f) if line)
             doc = []
@@ -63,9 +60,6 @@ class Corpus(object):
 
         Update self.vocabulary_size
         """
-        # #############################
-        # your code here
-        # #############################
         """
         unique_words = set()
         for document in self.documents:
@@ -89,9 +83,6 @@ class Corpus(object):
 
         self.term_doc_matrix[i][j] is the count of term j in document i
         """
-        # ############################
-        # your code here
-        # ############################
         matrix = {}
         for  i in range (self.number_of_documents):
             matrix[i] = {}
@@ -109,10 +100,7 @@ class Corpus(object):
         Don't forget to normalize! 
         HINT: you will find numpy's random matrix useful [https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.random.html]
         """
-        # ############################
-        # your code here
-        # ############################
-        
+
         self.document_topic_prob = np.random.random_sample((self.number_of_documents, number_of_topics))
         self.document_topic_prob = normalize(self.document_topic_prob)
         
@@ -148,9 +136,6 @@ class Corpus(object):
         """
         print("E step:")
         
-        # ############################
-        # your code here
-        # ############################
         number_of_topics = self.topic_prob.shape[1]
         denominator = 0
         for d in range(self.number_of_documents):
@@ -180,10 +165,6 @@ class Corpus(object):
                         s = s + count * self.topic_prob[d][z][w]
                     self.topic_word_prob[z][w] = s
         self.topic_word_prob = normalize(self.topic_word_prob)
-        # ############################
-        # your code here
-        # ############################
-
         
         # update P(z | d)
         for d in range(self.number_of_documents):
@@ -195,12 +176,6 @@ class Corpus(object):
                     self.document_topic_prob[d][z] = s
         self.document_topic_prob = normalize(self.document_topic_prob)
                 
-
-        # ############################
-        # your code here
-        # ############################
-
-
     def calculate_likelihood(self, number_of_topics):
         """ Calculate the current log-likelihood of the model using
         the model's updated probability matrices
@@ -217,9 +192,6 @@ class Corpus(object):
                 """if tmp > 0:"""
                 total += np.log(tmp) * self.term_doc_matrix[d][w]
         self.likelihoods.append(total)
-        # ############################
-        # your code here
-        # ############################
 
     def plsa(self, number_of_topics, max_iter, epsilon):
 
@@ -244,10 +216,6 @@ class Corpus(object):
 
         for iteration in range(max_iter):
             print("Iteration #" + str(iteration + 1) + "...")
-
-            # ############################
-            # your code here
-            # ############################
             self.expectation_step()
             self.maximization_step(number_of_topics)
             self.calculate_likelihood(number_of_topics)
@@ -256,7 +224,6 @@ class Corpus(object):
             if (abs(current_likelihood - self.likelihoods[iteration]) <= epsilon):
                 break
             current_likelihood = self.likelihoods[iteration]
-
 
 
 def main():
@@ -271,7 +238,6 @@ def main():
     max_iterations = 50
     epsilon = 0.001
     corpus.plsa(number_of_topics, max_iterations, epsilon)
-
 
 
 if __name__ == '__main__':
