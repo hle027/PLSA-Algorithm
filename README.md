@@ -1,4 +1,4 @@
-Implementing the PLSA Algorithm
+# Implementing the PLSA Algorithm
 
 
 In this MP, you will implement the PLSA algorithm discussed in lectures [9.7](https://www.coursera.org/learn/cs-410/lecture/HKe8K/9-7-probabilistic-latent-semantic-analysis-plsa-part-1) and [9.8](https://www.coursera.org/learn/cs-410/lecture/GJyGG/9-8-probabilistic-latent-semantic-analysis-plsa-part-2) of the Text Mining Coursera course.
