@@ -1,5 +1,5 @@
-# MP3: Implementing the PLSA Algorithm
-## DUE: November 8, 2020 at 11:59pm
+Implementing the PLSA Algorithm
+
 
 In this MP, you will implement the PLSA algorithm discussed in lectures [9.7](https://www.coursera.org/learn/cs-410/lecture/HKe8K/9-7-probabilistic-latent-semantic-analysis-plsa-part-1) and [9.8](https://www.coursera.org/learn/cs-410/lecture/GJyGG/9-8-probabilistic-latent-semantic-analysis-plsa-part-2) of the Text Mining Coursera course.
 You are not required to implement the PLSA algorithm with a background model (we will run tests assuming the background model has not been implemented). You are provided with two data sets in the `data` folder: `test.txt` and `dblp.txt`. You can assume that each line is a separate document.
@@ -36,6 +36,3 @@ The main data structures involved in the implementation of this EM algorithm are
 [1]	[Cheng’s note](http://sifaka.cs.uiuc.edu/czhai/pub/em-note.pdf) on the EM algorithm  
 [2]	[Chase Geigle’s note](http://times.cs.uiuc.edu/course/598f16/notes/em-algorithm.pdf) on the EM algorithm, which includes a derivation of the EM algorithm (see section 4), and  
 [3]	[Qiaozhu Mei’s note](http://times.cs.uiuc.edu/course/598f16/plsa-note.pdf) on the EM algorithm for PLSA, which includes a different derivation of the EM algorithm.
-
-
-THIS MP IS CODING AND DEBUGGING HEAVY! PLEASE DON'T LEAVE IT TILL THE LAST MINUTE!
